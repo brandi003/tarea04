@@ -97,10 +97,11 @@ int main(int argc, char *argv[])
 
 	
 	//Cada procesa realiza su suma parcial
-	float sumaParcial = 0.0;
 	mpi::scatter(world,numbersToShare,numbersToSum,ntotalByProc,senderRank);
+	float sumaParcial = 0.0;
 	for(size_t idx = 0; idx < ntotalByProc; idx++){
 		sumaParcial += std::sin((numbersToSum[idx]))*std::cos((numbersToSum[idx]));
+		std::cout << std::sin((numbersToSum[idx])) << " * " << std::cos((numbersToSum[idx])) << " = " << std::sin((numbersToSum[idx]))*std::cos((numbersToSum[idx])) << std::endl;
 	}
 	
 	// ###############Completar código############
