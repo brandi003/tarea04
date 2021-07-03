@@ -101,15 +101,14 @@ int main(int argc, char *argv[])
 	float sumaParcial = 0.0;
 	for(size_t idx = 0; idx < ntotalByProc; idx++){
 		sumaParcial += std::sin((numbersToSum[idx]))*std::cos((numbersToSum[idx]));
-		std::cout << "suma parcial "<< sumaParcial << " por " << rankID << std::endl;
 	}
 	
 	// ###############Completar código############
 	//Los procesos envian sus resultados parciales para que el proceso 0 haga la reducción
-	float sumaParalela = 0.0;
+	float sumaParalela;
 	// definición de mpi::reduce
 	//  https://www.boost.org/doc/libs/1_71_0/doc/html/boost/mpi/reduce.html
-	boost::mpi::reduce(world, *numbersToSum, sumaParalela, std::plus<float>(), 0);
+	boost::mpi::reduce(world, sumaParcial, sumaParalela, std::plus<float>(), 0);
 
 	//Finalmente, el proceso 0 muestra la suma paralela y el tiempo que tomó
 	//realizarla.
