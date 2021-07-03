@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
 	float sumaParcial = 0.0;
 	for(size_t idx = 0; idx < ntotalByProc; idx++){
 		sumaParcial += std::sin((numbersToSum[idx]))*std::cos((numbersToSum[idx]));
-		std::cout << std::sin((numbersToSum[idx])) << " * " << std::cos((numbersToSum[idx])) << " = " << std::sin((numbersToSum[idx]))*std::cos((numbersToSum[idx])) << " por " << rankID << std::endl;
+		std::cout << "suma parcial "<< sumaParcial << " por " << rankID << std::endl;
 	}
 	
 	// ###############Completar código############
