@@ -98,6 +98,7 @@ int main(int argc, char *argv[])
 	
 	//Cada procesa realiza su suma parcial
 	float sumaParcial = 0.0;
+	mpi::scatter(world,numbersToShare,numbersToSum,ntotalByProc,senderRank);
 	for(size_t idx = 0; idx < ntotalByProc; idx++){
 		sumaParcial += std::sin((numbersToSum[idx]))*std::cos((numbersToSum[idx]));
 	}
@@ -107,7 +108,7 @@ int main(int argc, char *argv[])
 	float sumaParalela = 0.0;
 	// definición de mpi::reduce
 	//  https://www.boost.org/doc/libs/1_71_0/doc/html/boost/mpi/reduce.html
-
+	boost::mpi::reduce(world, *numbersToSum, sumaParalela, std::plus<float>(), 0);
 
 	//Finalmente, el proceso 0 muestra la suma paralela y el tiempo que tomó
 	//realizarla.
